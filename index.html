@@ -3,452 +3,383 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>La ♡</title>
-
 <style>
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     min-height: 100vh;
     font-family: "Segoe UI", Tahoma, sans-serif;
-    color: #fff;
+    color: white;
     background:
-        radial-gradient(circle at 20% 20%, #5b3158 0%, transparent 35%),
-        radial-gradient(circle at 80% 80%, #33234d 0%, transparent 40%),
-        linear-gradient(135deg, #120d19, #211426, #100b16);
+        radial-gradient(circle at 20% 20%, #67385f 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, #3b2855 0%, transparent 40%),
+        linear-gradient(135deg, #120c18, #251526, #0d0912);
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
 }
-
 .container {
     width: 92%;
     max-width: 700px;
     text-align: center;
-    padding: 35px 20px;
+    padding: 40px 20px;
 }
-
 .la {
     font-family: Georgia, serif;
     font-size: 90px;
     letter-spacing: 8px;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     text-shadow: 0 0 35px rgba(255,255,255,.25);
 }
-
 .subtitle {
     font-size: 20px;
-    color: #e7cfe2;
+    color: #e8d3e4;
     margin-bottom: 35px;
 }
-
 .heart {
     display: inline-block;
     margin: 0 8px;
     animation: heartbeat 1.7s infinite;
 }
-
 .card {
     background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.13);
     backdrop-filter: blur(15px);
     border-radius: 28px;
     padding: 25px 18px;
     margin: 18px 0;
     box-shadow: 0 15px 50px rgba(0,0,0,.25);
 }
-
 .title {
     font-size: 16px;
-    color: #cdb9ca;
+    color: #d2bdcf;
     margin-bottom: 18px;
 }
-
 .countdown {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 9px;
 }
-
 .box {
-    background: rgba(0,0,0,.18);
+    background: rgba(0,0,0,.20);
     border-radius: 18px;
     padding: 15px 5px;
 }
-
 .number {
     font-size: clamp(25px, 7vw, 42px);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
 }
-
 .label {
-    color: #a99aa8;
+    color: #aaa0aa;
     font-size: 12px;
     margin-top: 5px;
 }
-
 .date {
     margin-top: 17px;
-    color: #a99aa8;
+    color: #aaa0aa;
     font-size: 13px;
 }
-
 .footer {
     margin-top: 28px;
-    color: #796d78;
+    color: #766b75;
     font-size: 12px;
 }
-
 @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
+    0%,100% { transform: scale(1); }
     15% { transform: scale(1.18); }
     30% { transform: scale(1); }
 }
-
-@media (max-width: 450px) {
+@media(max-width:450px) {
     .la {
         font-size: 70px;
     }
-
     .subtitle {
         font-size: 17px;
     }
-
     .card {
         padding: 20px 10px;
     }
-
     .box {
         padding: 13px 3px;
     }
 }
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
     <div class="la">La</div>
-
     <div class="subtitle">
         <span class="heart">♡</span>
         كم باقي لميلاد أجمل مخلوقة بالكون
         <span class="heart">♡</span>
     </div>
-
-
     <!-- الميلادي -->
     <div class="card">
-
         <div class="title">
             الميلاد الميلادي · 7 مايو
         </div>
-
-        <div class="countdown" id="gregorian">
+        <div class="countdown">
             <div class="box">
                 <div class="number" id="gDays">00</div>
                 <div class="label">يوم</div>
             </div>
-
             <div class="box">
                 <div class="number" id="gHours">00</div>
                 <div class="label">ساعة</div>
             </div>
-
             <div class="box">
                 <div class="number" id="gMinutes">00</div>
                 <div class="label">دقيقة</div>
             </div>
-
             <div class="box">
                 <div class="number" id="gSeconds">00</div>
                 <div class="label">ثانية</div>
             </div>
         </div>
-
         <div class="date">
             7 مايو 2008 · ميلاد La
         </div>
-
     </div>
-
-
     <!-- الهجري -->
     <div class="card">
-
         <div class="title">
             الميلاد الهجري · 2 جمادى الأولى
         </div>
-
-        <div class="countdown" id="hijri">
+        <div class="countdown">
             <div class="box">
                 <div class="number" id="hDays">00</div>
                 <div class="label">يوم</div>
             </div>
-
             <div class="box">
                 <div class="number" id="hHours">00</div>
                 <div class="label">ساعة</div>
             </div>
-
             <div class="box">
                 <div class="number" id="hMinutes">00</div>
                 <div class="label">دقيقة</div>
             </div>
-
             <div class="box">
                 <div class="number" id="hSeconds">00</div>
                 <div class="label">ثانية</div>
             </div>
         </div>
-
         <div class="date" id="hijriDate">
             2 جمادى الأولى
         </div>
-
     </div>
-
-
     <div class="footer">
         Made with ♡ for La
     </div>
-
 </div>
-
-
 <script>
-
-function pad(number) {
-    return String(number).padStart(2, "0");
-}
-
-
-/* =========================
-   الميلادي
-========================= */
-
-function getNextGregorianBirthday() {
-
-    const now = new Date();
-
-    let year = now.getFullYear();
-
-    let birthday = new Date(
-        year,
-        4,      // مايو = 4
-        7,
-        0, 0, 0
-    );
-
-    if (birthday <= now) {
-        birthday = new Date(
-            year + 1,
-            4,
-            7,
-            0, 0, 0
-        );
-    }
-
-    return birthday;
-}
-
-
-function updateGregorian() {
-
-    const now = new Date();
-    const birthday = getNextGregorianBirthday();
-
-    let difference = birthday - now;
-
+/* =====================================
+   إعدادات
+===================================== */
+const RIYADH_OFFSET = 3 * 60 * 60 * 1000;
+/* =====================================
+   تحويل الوقت إلى أجزاء
+===================================== */
+function countdownParts(target) {
+    const now = Date.now();
+    let difference = Math.max(0, target - now);
     let totalSeconds = Math.floor(difference / 1000);
-
     const days = Math.floor(totalSeconds / 86400);
-
     totalSeconds %= 86400;
-
     const hours = Math.floor(totalSeconds / 3600);
-
     totalSeconds %= 3600;
-
     const minutes = Math.floor(totalSeconds / 60);
-
     const seconds = totalSeconds % 60;
-
-
-    document.getElementById("gDays").textContent = pad(days);
-    document.getElementById("gHours").textContent = pad(hours);
-    document.getElementById("gMinutes").textContent = pad(minutes);
-    document.getElementById("gSeconds").textContent = pad(seconds);
+    return {
+        days,
+        hours,
+        minutes,
+        seconds
+    };
 }
-
-
-
-/* =========================
-   الهجري
-========================= */
-
-const hijriMonths = [
-    "محرم",
-    "صفر",
-    "ربيع الأول",
-    "ربيع الآخر",
-    "جمادى الأولى",
-    "جمادى الآخرة",
-    "رجب",
-    "شعبان",
-    "رمضان",
-    "شوال",
-    "ذو القعدة",
-    "ذو الحجة"
-];
-
-
-function getHijriDate(date) {
-
-    const formatter = new Intl.DateTimeFormat(
-        "ar-SA-u-ca-islamic-umalqura",
-        {
-            day: "numeric",
-            month: "numeric",
-            year: "numeric"
-        }
-    );
-
-    const parts = formatter.formatToParts(date);
-
-    let day;
-    let month;
-    let year;
-
-    parts.forEach(part => {
-
+function showCountdown(prefix, data) {
+    document.getElementById(prefix + "Days").textContent =
+        String(data.days).padStart(2, "0");
+    document.getElementById(prefix + "Hours").textContent =
+        String(data.hours).padStart(2, "0");
+    document.getElementById(prefix + "Minutes").textContent =
+        String(data.minutes).padStart(2, "0");
+    document.getElementById(prefix + "Seconds").textContent =
+        String(data.seconds).padStart(2, "0");
+}
+/* =====================================
+   الميلادي
+   7 مايو
+===================================== */
+function getNextGregorianBirthday() {
+    const now = new Date();
+    /*
+      نأخذ تاريخ الرياض بدل توقيت الجهاز.
+      السعودية UTC+3 ولا يوجد فيها تغيير صيفي.
+    */
+    const riyadhNow =
+        new Date(now.getTime() + RIYADH_OFFSET);
+    const year =
+        riyadhNow.getUTCFullYear();
+    let target =
+        Date.UTC(year, 4, 7, 0, 0, 0) -
+        RIYADH_OFFSET;
+    if (target <= now.getTime()) {
+        target =
+            Date.UTC(year + 1, 4, 7, 0, 0, 0) -
+            RIYADH_OFFSET;
+    }
+    return target;
+}
+/* =====================================
+   الهجري أم القرى
+===================================== */
+function getHijriParts(date) {
+    const formatter =
+        new Intl.DateTimeFormat(
+            "en-SA-u-ca-islamic-umalqura",
+            {
+                timeZone: "Asia/Riyadh",
+                day: "numeric",
+                month: "numeric",
+                year: "numeric"
+            }
+        );
+    const parts =
+        formatter.formatToParts(date);
+    let day = 0;
+    let month = 0;
+    let year = 0;
+    for (const part of parts) {
         if (part.type === "day")
             day = Number(part.value);
-
         if (part.type === "month")
             month = Number(part.value);
-
         if (part.type === "year")
             year = Number(part.value);
-
-    });
-
+    }
     return {
         day,
         month,
         year
     };
 }
-
-
+/*
+  نبحث عن 2 جمادى الأولى القادمة
+  باستخدام تقويم أم القرى.
+*/
 function getNextHijriBirthday() {
-
     const now = new Date();
-
-    const current = getHijriDate(now);
-
-    let year = current.year;
-
+    const current =
+        getHijriParts(now);
+    let targetYear =
+        current.year;
     if (
         current.month > 5 ||
-        (current.month === 5 && current.day >= 2)
+        (
+            current.month === 5 &&
+            current.day >= 2
+        )
     ) {
-        year++;
+        targetYear++;
     }
-
     /*
-       نبحث عن اليوم الميلادي الذي يوافق
-       2 جمادى الأولى من السنة الهجرية القادمة.
+      نبدأ من اليوم ونبحث للأمام.
     */
-
-    let test = new Date(
-        now.getTime()
-    );
-
-    for (let i = 0; i < 500; i++) {
-
-        const h = getHijriDate(test);
-
+    let date =
+        new Date(now.getTime());
+    for (let i = 0; i < 380; i++) {
+        const h =
+            getHijriParts(date);
         if (
-            h.year === year &&
+            h.year === targetYear &&
             h.month === 5 &&
             h.day === 2
         ) {
-
-            test.setHours(0, 0, 0, 0);
-
-            return test;
+            /*
+              بداية يوم الميلاد في الرياض:
+              00:00
+            */
+            const riyadh =
+                new Date(
+                    date.getTime() + RIYADH_OFFSET
+                );
+            const y =
+                riyadh.getUTCFullYear();
+            const m =
+                riyadh.getUTCMonth();
+            const d =
+                riyadh.getUTCDate();
+            return (
+                Date.UTC(
+                    y,
+                    m,
+                    d,
+                    0,
+                    0,
+                    0
+                ) -
+                RIYADH_OFFSET
+            );
         }
-
-        test.setDate(test.getDate() + 1);
+        date.setUTCDate(
+            date.getUTCDate() + 1
+        );
     }
-
-    return now;
+    return now.getTime();
 }
-
-
-function updateHijri() {
-
-    const now = new Date();
-
-    const birthday = getNextHijriBirthday();
-
-    let difference = birthday - now;
-
-    let totalSeconds = Math.max(
-        0,
-        Math.floor(difference / 1000)
+/* =====================================
+   التحديث
+===================================== */
+function updateAll() {
+    /*
+      الاثنين يعتمدون على نفس Date.now()
+      وبالتالي يتحركون مع بعض كل ثانية.
+    */
+    const now = Date.now();
+    /* الميلادي */
+    const gregorianTarget =
+        getNextGregorianBirthday();
+    const gregorian =
+        countdownParts(
+            gregorianTarget
+        );
+    showCountdown(
+        "g",
+        gregorian
     );
-
-    const days = Math.floor(totalSeconds / 86400);
-
-    totalSeconds %= 86400;
-
-    const hours = Math.floor(totalSeconds / 3600);
-
-    totalSeconds %= 3600;
-
-    const minutes = Math.floor(totalSeconds / 60);
-
-    const seconds = totalSeconds % 60;
-
-
-    document.getElementById("hDays").textContent = pad(days);
-    document.getElementById("hHours").textContent = pad(hours);
-    document.getElementById("hMinutes").textContent = pad(minutes);
-    document.getElementById("hSeconds").textContent = pad(seconds);
-
-
-    const h = getHijriDate(birthday);
-
-    document.getElementById("hijriDate").textContent =
+    /* الهجري */
+    const hijriTarget =
+        getNextHijriBirthday();
+    const hijri =
+        countdownParts(
+            hijriTarget
+        );
+    showCountdown(
+        "h",
+        hijri
+    );
+    /* التاريخ الهجري القادم */
+    const h =
+        getHijriParts(
+            new Date(hijriTarget)
+        );
+    document.getElementById(
+        "hijriDate"
+    ).textContent =
         `2 جمادى الأولى ${h.year} هـ`;
 }
-
-
-/* تحديث مباشر */
-
-function updateAll() {
-
-    updateGregorian();
-    updateHijri();
-
-}
-
+/* تشغيل فوري */
 updateAll();
-
+/*
+  تحديث كل ثانية بالضبط تقريباً.
+*/
 setInterval(updateAll, 1000);
-
 </script>
-
 </body>
 </html>
