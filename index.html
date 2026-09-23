@@ -14,13 +14,17 @@
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #160b24, #3b155f, #14091f);
-    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+
+    font-family: Arial, sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(circle at top, #70408f 0%, transparent 42%),
+        linear-gradient(135deg, #120817, #291039, #100611);
 }
 
 .container {
@@ -31,22 +35,23 @@ body {
 
 .name {
     font-family: Georgia, serif;
-    font-size: 75px;
-    margin-bottom: 5px;
+    font-size: 80px;
+    margin: 0 0 5px;
 }
 
 .subtitle {
-    font-size: 22px;
+    font-size: 21px;
     margin-bottom: 35px;
 }
 
 .heart {
+    display: inline-block;
     animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
     50% {
-        transform: scale(1.2);
+        transform: scale(1.25);
     }
 }
 
@@ -57,16 +62,19 @@ body {
 }
 
 .card {
-    background: rgba(255,255,255,0.10);
-    border: 1px solid rgba(255,255,255,0.15);
+    padding: 28px 20px;
     border-radius: 25px;
-    padding: 25px;
-    backdrop-filter: blur(10px);
+
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.16);
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    backdrop-filter: blur(12px);
 }
 
 .card h2 {
-    margin-top: 0;
-    font-size: 22px;
+    margin: 0 0 22px;
+    font-size: 21px;
 }
 
 .countdown {
@@ -76,35 +84,30 @@ body {
 }
 
 .box {
-    background: rgba(0,0,0,0.25);
+    padding: 14px 4px;
     border-radius: 15px;
-    padding: 15px 5px;
+    background: rgba(0,0,0,0.25);
 }
 
 .number {
-    font-size: 28px;
+    font-size: 27px;
     font-weight: bold;
 }
 
 .label {
-    font-size: 12px;
-    opacity: 0.75;
     margin-top: 5px;
-}
-
-.error {
-    color: #ffb4b4;
-    margin-top: 15px;
-    display: none;
+    font-size: 12px;
+    opacity: 0.7;
 }
 
 @media (max-width: 650px) {
+
     .cards {
         grid-template-columns: 1fr;
     }
 
     .name {
-        font-size: 60px;
+        font-size: 65px;
     }
 
     .subtitle {
@@ -127,75 +130,82 @@ body {
 
     <div class="cards">
 
+        <!-- الميلاد الميلادي -->
         <div class="card">
+
             <h2>🎂 الميلاد الميلادي</h2>
 
             <div class="countdown">
+
                 <div class="box">
-                    <div class="number" id="gDays">--</div>
+                    <div class="number" id="gDays">00</div>
                     <div class="label">يوم</div>
                 </div>
 
                 <div class="box">
-                    <div class="number" id="gHours">--</div>
+                    <div class="number" id="gHours">00</div>
                     <div class="label">ساعة</div>
                 </div>
 
                 <div class="box">
-                    <div class="number" id="gMinutes">--</div>
+                    <div class="number" id="gMinutes">00</div>
                     <div class="label">دقيقة</div>
                 </div>
 
                 <div class="box">
-                    <div class="number" id="gSeconds">--</div>
+                    <div class="number" id="gSeconds">00</div>
                     <div class="label">ثانية</div>
                 </div>
+
             </div>
+
         </div>
 
 
+        <!-- الميلاد الهجري -->
         <div class="card">
+
             <h2>🌙 الميلاد الهجري</h2>
 
             <div class="countdown">
+
                 <div class="box">
-                    <div class="number" id="hDays">--</div>
+                    <div class="number" id="hDays">00</div>
                     <div class="label">يوم</div>
                 </div>
 
                 <div class="box">
-                    <div class="number" id="hHours">--</div>
+                    <div class="number" id="hHours">00</div>
                     <div class="label">ساعة</div>
                 </div>
 
                 <div class="box">
-                    <div class="number" id="hMinutes">--</div>
+                    <div class="number" id="hMinutes">00</div>
                     <div class="label">دقيقة</div>
                 </div>
 
                 <div class="box">
-                    <div class="number" id="hSeconds">--</div>
+                    <div class="number" id="hSeconds">00</div>
                     <div class="label">ثانية</div>
                 </div>
+
             </div>
 
-            <div class="error" id="error">
-                تعذر حساب التاريخ الهجري
-            </div>
         </div>
 
     </div>
+
 </div>
 
 
 <script>
 
-/* =========================
-   الميلاد الميلادي
+/* =========================================
+   التاريخ الميلادي
    7 مايو
-========================= */
+========================================= */
 
-function getNextGregorianBirthday() {
+function getGregorianTarget() {
 
     const now = new Date();
 
@@ -205,14 +215,17 @@ function getNextGregorianBirthday() {
         7,
         0,
         0,
+        0,
         0
     );
 
     if (target <= now) {
+
         target = new Date(
             now.getFullYear() + 1,
             4,
             7,
+            0,
             0,
             0,
             0
@@ -223,183 +236,131 @@ function getNextGregorianBirthday() {
 }
 
 
-/* =========================
+/* =========================================
    التاريخ الهجري
-   2 جمادى الأولى
-   باستخدام أم القرى
-========================= */
+   2 جمادى الأولى 1448
+   = 13 أكتوبر 2026
+========================================= */
 
-const hijriFormatter =
-    new Intl.DateTimeFormat(
-        "en-US-u-ca-islamic-umalqura",
-        {
-            day: "numeric",
-            month: "numeric",
-            year: "numeric",
-            timeZone: "Asia/Riyadh"
-        }
-    );
-
-
-function getHijriDate(date) {
-
-    const parts = hijriFormatter.formatToParts(date);
-
-    let day = null;
-    let month = null;
-    let year = null;
-
-    for (const part of parts) {
-
-        if (part.type === "day") {
-            day = Number(part.value);
-        }
-
-        if (part.type === "month") {
-            month = Number(part.value);
-        }
-
-        if (part.type === "year") {
-            year = Number(part.value);
-        }
-    }
-
-    return {
-        day,
-        month,
-        year
-    };
-}
-
-
-/* 
-   يبحث عن أقرب يوم:
-   2 / 5 هجري
-*/
-
-function findNextHijriBirthday() {
+function getHijriTarget() {
 
     const now = new Date();
 
-    let date = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
+    let target = new Date(
+        2026,
+        9,
+        13,
+        0,
         0,
         0,
         0
     );
 
-    for (let i = 0; i < 400; i++) {
+    /*
+       إذا انتهى موعد 2026،
+       ننتقل للموعد الهجري التالي.
+    */
 
-        const hijri = getHijriDate(date);
+    while (target <= now) {
 
-        if (
-            hijri.day === 2 &&
-            hijri.month === 5
-        ) {
-
-            return new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate(),
-                0,
-                0,
-                0
-            );
-        }
-
-        date.setDate(date.getDate() + 1);
+        target.setDate(
+            target.getDate() + 354
+        );
     }
 
-    return null;
+    return target;
 }
 
 
-/* =========================
-   تحويل الوقت إلى عداد
-========================= */
+/* =========================================
+   العد الحقيقي
+========================================= */
 
-function updateCountdown(target, prefix) {
+function countdown(target, prefix) {
 
     const now = new Date();
 
-    let difference = target - now;
+    const difference = Math.max(
+        0,
+        target.getTime() - now.getTime()
+    );
 
-    if (difference < 0) {
-        difference = 0;
-    }
 
-    const totalSeconds =
+    /*
+       نحسب كل شيء من الثواني المتبقية
+    */
+
+    let totalSeconds =
         Math.floor(difference / 1000);
+
 
     const days =
         Math.floor(totalSeconds / 86400);
 
+    totalSeconds -= days * 86400;
+
+
     const hours =
-        Math.floor((totalSeconds % 86400) / 3600);
+        Math.floor(totalSeconds / 3600);
+
+    totalSeconds -= hours * 3600;
+
 
     const minutes =
-        Math.floor((totalSeconds % 3600) / 60);
+        Math.floor(totalSeconds / 60);
 
     const seconds =
-        totalSeconds % 60;
+        totalSeconds - minutes * 60;
 
 
-    document.getElementById(prefix + "Days").textContent =
+    document.getElementById(prefix + "Days")
+        .textContent =
         String(days).padStart(2, "0");
 
-    document.getElementById(prefix + "Hours").textContent =
+
+    document.getElementById(prefix + "Hours")
+        .textContent =
         String(hours).padStart(2, "0");
 
-    document.getElementById(prefix + "Minutes").textContent =
+
+    document.getElementById(prefix + "Minutes")
+        .textContent =
         String(minutes).padStart(2, "0");
 
-    document.getElementById(prefix + "Seconds").textContent =
+
+    document.getElementById(prefix + "Seconds")
+        .textContent =
         String(seconds).padStart(2, "0");
 }
 
 
-/* =========================
-   تشغيل
-========================= */
+/* =========================================
+   تشغيل العدادين
+========================================= */
 
-function updateAll() {
+function update() {
 
-    const gregorianTarget =
-        getNextGregorianBirthday();
-
-    updateCountdown(
-        gregorianTarget,
+    countdown(
+        getGregorianTarget(),
         "g"
     );
 
-
-    const hijriTarget =
-        findNextHijriBirthday();
-
-    if (hijriTarget) {
-
-        document.getElementById("error")
-            .style.display = "none";
-
-        updateCountdown(
-            hijriTarget,
-            "h"
-        );
-
-    } else {
-
-        document.getElementById("error")
-            .style.display = "block";
-
-    }
+    countdown(
+        getHijriTarget(),
+        "h"
+    );
 }
 
 
-updateAll();
+/* تشغيل فورًا */
+update();
 
-setInterval(updateAll, 1000);
+
+/* تحديث كل ثانية */
+setInterval(
+    update,
+    1000
+);
 
 </script>
 
