@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,17 +15,18 @@
 body {
     margin: 0;
     min-height: 100vh;
+    padding: 20px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
 
     font-family: Arial, sans-serif;
     color: white;
 
     background:
-        radial-gradient(circle at top, #70408f 0%, transparent 42%),
-        linear-gradient(135deg, #120817, #291039, #100611);
+        radial-gradient(circle at top, #75438f 0%, transparent 45%),
+        linear-gradient(135deg, #120817, #2b103d, #100611);
 }
 
 .container {
@@ -36,12 +38,12 @@ body {
 .name {
     font-family: Georgia, serif;
     font-size: 80px;
-    margin: 0 0 5px;
+    margin: 0;
 }
 
 .subtitle {
     font-size: 21px;
-    margin-bottom: 35px;
+    margin: 8px 0 35px;
 }
 
 .heart {
@@ -69,6 +71,7 @@ body {
     border: 1px solid rgba(255,255,255,0.16);
 
     box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+
     backdrop-filter: blur(12px);
 }
 
@@ -84,13 +87,13 @@ body {
 }
 
 .box {
-    padding: 14px 4px;
+    padding: 15px 5px;
     border-radius: 15px;
     background: rgba(0,0,0,0.25);
 }
 
 .number {
-    font-size: 27px;
+    font-size: 28px;
     font-weight: bold;
 }
 
@@ -101,7 +104,6 @@ body {
 }
 
 @media (max-width: 650px) {
-
     .cards {
         grid-template-columns: 1fr;
     }
@@ -117,6 +119,7 @@ body {
 </style>
 </head>
 
+
 <body>
 
 <div class="container">
@@ -128,9 +131,11 @@ body {
         <span class="heart">♡</span>
     </div>
 
+
     <div class="cards">
 
-        <!-- الميلاد الميلادي -->
+        <!-- الميلادي -->
+
         <div class="card">
 
             <h2>🎂 الميلاد الميلادي</h2>
@@ -162,7 +167,8 @@ body {
         </div>
 
 
-        <!-- الميلاد الهجري -->
+        <!-- الهجري -->
+
         <div class="card">
 
             <h2>🌙 الميلاد الهجري</h2>
@@ -200,10 +206,10 @@ body {
 
 <script>
 
-/* =========================================
-   التاريخ الميلادي
+/* =====================================
+   الميلادي
    7 مايو
-========================================= */
+===================================== */
 
 function getGregorianTarget() {
 
@@ -236,129 +242,217 @@ function getGregorianTarget() {
 }
 
 
-/* =========================================
-   التاريخ الهجري
-   2 جمادى الأولى 1448
-   = 13 أكتوبر 2026
-========================================= */
+/* =====================================
+   الهجري
+   2 جمادى الأولى
+===================================== */
+
+const hijriFormatter = new Intl.DateTimeFormat(
+    "en-US-u-ca-islamic-umalqura",
+    {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+        timeZone: "Asia/Riyadh"
+    }
+);
+
+
+function getHijriParts(date) {
+
+    const parts =
+        hijriFormatter.formatToParts(date);
+
+    let day = 0;
+    let month = 0;
+    let year = 0;
+
+    for (const part of parts) {
+
+        if (part.type === "day") {
+            day = Number(part.value);
+        }
+
+        if (part.type === "month") {
+            month = Number(part.value);
+        }
+
+        if (part.type === "year") {
+            year = Number(part.value);
+        }
+    }
+
+    return {
+        day,
+        month,
+        year
+    };
+}
+
 
 function getHijriTarget() {
 
     const now = new Date();
 
-    let target = new Date(
-        2026,
-        9,
-        13,
+    let date = new Date(now);
+
+    date.setHours(
         0,
         0,
         0,
         0
     );
 
+
     /*
-       إذا انتهى موعد 2026،
-       ننتقل للموعد الهجري التالي.
+       نبحث عن:
+       اليوم 2
+       الشهر 5 = جمادى الأولى
     */
 
-    while (target <= now) {
+    for (let i = 0; i < 370; i++) {
 
-        target.setDate(
-            target.getDate() + 354
+        const hijri =
+            getHijriParts(date);
+
+
+        if (
+            hijri.day === 2 &&
+            hijri.month === 5
+        ) {
+
+            return new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                0,
+                0,
+                0,
+                0
+            );
+        }
+
+
+        date.setDate(
+            date.getDate() + 1
         );
     }
 
-    return target;
+
+    return null;
 }
 
 
-/* =========================================
-   العد الحقيقي
-========================================= */
+/* =====================================
+   العداد
+===================================== */
 
-function countdown(target, prefix) {
+function updateCountdown(target, prefix) {
+
+    if (!target) {
+        return;
+    }
 
     const now = new Date();
 
-    const difference = Math.max(
-        0,
-        target.getTime() - now.getTime()
-    );
+    let remaining =
+        target.getTime() -
+        now.getTime();
 
 
-    /*
-       نحسب كل شيء من الثواني المتبقية
-    */
-
-    let totalSeconds =
-        Math.floor(difference / 1000);
+    if (remaining < 0) {
+        remaining = 0;
+    }
 
 
     const days =
-        Math.floor(totalSeconds / 86400);
+        Math.floor(
+            remaining / 86400000
+        );
 
-    totalSeconds -= days * 86400;
+
+    remaining =
+        remaining % 86400000;
 
 
     const hours =
-        Math.floor(totalSeconds / 3600);
+        Math.floor(
+            remaining / 3600000
+        );
 
-    totalSeconds -= hours * 3600;
+
+    remaining =
+        remaining % 3600000;
 
 
     const minutes =
-        Math.floor(totalSeconds / 60);
+        Math.floor(
+            remaining / 60000
+        );
+
 
     const seconds =
-        totalSeconds - minutes * 60;
+        Math.floor(
+            (remaining % 60000) / 1000
+        );
 
 
-    document.getElementById(prefix + "Days")
-        .textContent =
+    document.getElementById(
+        prefix + "Days"
+    ).textContent =
         String(days).padStart(2, "0");
 
 
-    document.getElementById(prefix + "Hours")
-        .textContent =
+    document.getElementById(
+        prefix + "Hours"
+    ).textContent =
         String(hours).padStart(2, "0");
 
 
-    document.getElementById(prefix + "Minutes")
-        .textContent =
+    document.getElementById(
+        prefix + "Minutes"
+    ).textContent =
         String(minutes).padStart(2, "0");
 
 
-    document.getElementById(prefix + "Seconds")
-        .textContent =
+    document.getElementById(
+        prefix + "Seconds"
+    ).textContent =
         String(seconds).padStart(2, "0");
 }
 
 
-/* =========================================
-   تشغيل العدادين
-========================================= */
+/* =====================================
+   التشغيل
+===================================== */
 
-function update() {
+function updateAll() {
 
-    countdown(
-        getGregorianTarget(),
+    const gregorian =
+        getGregorianTarget();
+
+    const hijri =
+        getHijriTarget();
+
+
+    updateCountdown(
+        gregorian,
         "g"
     );
 
-    countdown(
-        getHijriTarget(),
+
+    updateCountdown(
+        hijri,
         "h"
     );
 }
 
 
-/* تشغيل فورًا */
-update();
+updateAll();
 
 
-/* تحديث كل ثانية */
 setInterval(
-    update,
+    updateAll,
     1000
 );
 
